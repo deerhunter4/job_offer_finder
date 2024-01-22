@@ -5,6 +5,7 @@ This program is written in Python. It's purpose is to facilitate the search for 
 
 **Requirements:**
 
-Python 3.12, python packages: pandas, ...
+Python 3.12, python packages: pandas, TBU
 
 **Usage:**
+TBU
