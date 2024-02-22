@@ -1,6 +1,6 @@
-# job_offer_finder
+# Better_Weather
 
-This program is written in Python. It's purpose is to facilitate the search for job offers on some popular websites (e.g. Linkedin). After providing searched term eg. "data analyst" and some additional criteria such as: location (e.g. Madrid), job_type (e.g. remote) and key_word (e.g. python) you will receive a table with matches. The result table will include all your search information, as well as the full job name, company name and website link. The table will be updated after each search in a way that duplicates will not be allowed.
+This program is written in Python. Its purpose is to collect weather forecast data from a few websites (e.g. Open-Meteo, WeatherAPI) and combine it into one more accurate weather prediction. After providing the location eg. "Madrid" you will receive a file with weather data and a user-friendly plot. The file will contain raw forecast data acquired from web pages and counted mean values. The plot file will contain hourly temperature and precipitation graph.
 
 
 **Requirements:**
