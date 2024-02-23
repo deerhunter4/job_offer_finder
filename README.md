@@ -5,7 +5,10 @@ This program is written in Python. Its purpose is to collect weather forecast da
 
 **Requirements:**
 
-Python 3.12, python packages: pandas, TBU
+You need to register yourself on few websites (list below) to receive an API key:
+- https://www.weatherapi.com/signup.aspx
+
+Python 3.12, python packages: requests, pandas, TBU
 
 **Usage:**
 TBU
