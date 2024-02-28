@@ -88,3 +88,48 @@ print(hours_2)
 
 print(temp_c)
 print(temp_c_2)
+
+
+#####################
+### meteostat.net ###
+#####################
+
+# You need to register on the web page first to get API key
+# https://rapidapi.com/meteostat/api/meteostat/pricing
+# The url is set to get forecast data. For historical data it should be changed
+
+url_3 = 'https://meteostat.p.rapidapi.com/point/hourly'
+API_KEY_3 = <paste here your personal API key>
+
+params_3 = {
+	"lat": lat,
+	"lon": lon,
+	"start":"2024-02-28", #here we have to use some timestump to do it automaticaly
+    "end":"2024-02-28"
+}
+
+headers_3 = {
+	"X-RapidAPI-Key": <paste here your personal API key>,
+	"X-RapidAPI-Host": "meteostat.p.rapidapi.com"
+}
+
+res_3 = requests.get(url_3, headers= headers_3, params= params_3)
+res_3_dict = res_3.json()
+
+hours_3 = []
+temp_c_3 = []
+rain_3 = []
+for item in res_3_dict["data"]:
+    hours_3.append(item['time'])
+    temp_c_3.append(item['temp'])
+    rain_3.append(item['prcp'])
+    
+print(hours_3)
+print(temp_c_3)
+print(rain_3)
+
+print(temp_c), print(temp_c_2), print(temp_c_3)
+
+print(rain), print(rain_2), print(rain_3)
+
+print(hours[1]), print(hours_2[1]), print(hours_3[1]) # three different time formats
