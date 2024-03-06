@@ -128,8 +128,8 @@ print(hours_meteostat)
 print(temp_c_meteostat)
 print(rain_meteostat)
 
-print(temp_c_wheatherapi), print(temp_c_openmeteo), print(temp_c_meteostat)
+print('', temp_c_wheatherapi, '\n',temp_c_openmeteo, '\n', temp_c_meteostat)
 
-print(rain_wheatherapi), print(rain_openmeteo), print(rain_meteostat)
+print('', rain_wheatherapi, '\n', rain_openmeteo, '\n', rain_meteostat)
 
-print(hours_wheatherapi[1]), print(hours_openmeteo[1]), print(hours_meteostat[1]) # three different time formats
+print('', hours_wheatherapi[1], '\n', hours_openmeteo[1], '\n', hours_meteostat[1]) # three different time formats
