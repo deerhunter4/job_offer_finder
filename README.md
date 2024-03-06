@@ -7,7 +7,11 @@ This program is written in Python. Its purpose is to collect weather forecast da
 
 You need to register yourself on few websites (list below) to receive an API key:
 - https://www.weatherapi.com/signup.aspx
-- https://rapidapi.com/meteostat/api/meteostat/pricing #plan basic
+- https://rapidapi.com/meteostat/api/meteostat/pricing # choose 'plan basic'
+
+The keys will generated automaticly and will be available after login to your account on sites:
+- https://www.weatherapi.com/my/
+- https://rapidapi.com/meteostat/api/meteostat/
 
 Python 3.12, python packages: requests, pandas, TBU
 
