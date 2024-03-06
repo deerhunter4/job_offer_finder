@@ -18,9 +18,9 @@ API_KEY_wheatherapi = <paste here your personal API key>
 # You can change the name of the city <q parameter>, search engine is quite efficient
 # days=1 means that you get hourly forecast for one date, the day you are make a request. 
 # To get forecast for next day you need additional parameter
-params_wheatherapi = dict(key= API_KEY_wheatherapi, q='Przemysl', days=1) 
+params_wheatherapi = dict(key=API_KEY_wheatherapi, q='Przemysl', days=1) 
 
-resonse_wheatherapi = requests.get(url_wheatherapi, params= params_wheatherapi)
+resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
 
 # print(resonse_wheatherapi)
 # print(resonse_wheatherapi.status_code)
@@ -113,7 +113,7 @@ headers_meteostat = {
 	"X-RapidAPI-Host": "meteostat.p.rapidapi.com"
 }
 
-response_meteostat = requests.get(url_meteostat, headers= headers_meteostat, params= params_meteostat)
+response_meteostat = requests.get(url_meteostat, headers=headers_meteostat, params=params_meteostat)
 response_meteostat_dict = response_meteostat.json()
 
 hours_meteostat = []
