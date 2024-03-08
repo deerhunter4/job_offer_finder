@@ -10,8 +10,9 @@ You need to register yourself on few websites (list below) to receive an API key
 - https://rapidapi.com/meteostat/api/meteostat/pricing # choose 'plan basic'
 
 The keys will generated automaticly and will be available after login to your account on sites:
-- https://www.weatherapi.com/my/
-- https://rapidapi.com/meteostat/api/meteostat/
+- for weatherapi: https://www.weatherapi.com/docs/#intro-getting-started
+- for rapidapi: https://docs.rapidapi.com/docs/keys-and-key-rotation#how-to-find-your-api-key
+
 
 Python 3.12, python packages: requests, pandas, TBU
 
