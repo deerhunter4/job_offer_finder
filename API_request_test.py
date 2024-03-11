@@ -116,12 +116,13 @@ print(temp_c_openmeteo)
 
 url_meteostat = 'https://meteostat.p.rapidapi.com/point/hourly'
 API_KEY_meteostat = keys_dict['meteostat.net']
+current_date = hours_wheatherapi[1].split(' ')[0]
 
 params_meteostat = {
 	"lat": latitude,
 	"lon": longitude,
-	"start":"2024-03-06", # here we have to use some function that automatically retrieves today's date
-	"end":"2024-03-06"
+	"start": current_date, # current day obtained from first api request
+	"end": current_date
 }
 
 headers_meteostat = {
