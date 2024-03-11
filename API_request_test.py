@@ -3,6 +3,22 @@
 
 import requests
 import json
+import os
+
+keys_path = './better_weather_keys.txt'
+
+if os.path.isfile(keys_path):
+    keys_file = open(keys_path, "r")
+else:
+    print("Warning: better_weather_keys.txt file is missing or it is not in the working directory!")
+
+# read input file as list of lists
+keys_dict = {}
+for line in keys_file:
+    key, value = line.strip().split(',')
+    keys_dict[key] = value
+
+keys_file.close()
 
 ######################
 ### weatherapi.com ###
@@ -13,7 +29,7 @@ import json
 # The url is set to get forecast data. For historical data it should be changed
 
 url_wheatherapi = 'https://api.weatherapi.com/v1/forecast.json'
-API_KEY_wheatherapi = <paste here your personal API key>
+API_KEY_wheatherapi = keys_dict['wheatherapi.com']
 
 # You can change the name of the city <q parameter>, search engine is quite efficient
 # days=1 means that you get hourly forecast for one date, the day you are make a request. 
@@ -66,7 +82,7 @@ url_openmeteo = "https://api.open-meteo.com/v1/forecast"
 params_openmeteo = {
 	"latitude": latitude,
 	"longitude": longitude,
-	"hourly": ["temperature_2m", "precipitation"], # here we can extend number of parameters
+	"hourly": ["temperature_2m", "precipitation"],  # here we can extend number of parameters
 	"forecast_days": 1
 }
 
@@ -99,7 +115,7 @@ print(temp_c_openmeteo)
 # The url is set to get forecast data. For historical data it should be changed
 
 url_meteostat = 'https://meteostat.p.rapidapi.com/point/hourly'
-API_KEY_meteostat = <paste here your personal API key>
+API_KEY_meteostat = keys_dict['meteostat.net']
 
 params_meteostat = {
 	"lat": latitude,
@@ -109,7 +125,7 @@ params_meteostat = {
 }
 
 headers_meteostat = {
-	"X-RapidAPI-Key": <paste here your personal API key>,
+	"X-RapidAPI-Key": API_KEY_meteostat,
 	"X-RapidAPI-Host": "meteostat.p.rapidapi.com"
 }
 
@@ -123,7 +139,7 @@ for item in response_meteostat_dict["data"]:
     hours_meteostat.append(item['time'])
     temp_c_meteostat.append(item['temp'])
     rain_meteostat.append(item['prcp'])
-    
+
 print(hours_meteostat)
 print(temp_c_meteostat)
 print(rain_meteostat)
