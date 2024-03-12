@@ -7,12 +7,13 @@ import os
 
 keys_path = './better_weather_keys.txt'
 
-if os.path.isfile(keys_path):
+# Check if better_weather_keys.txt file exists and it is not empty
+if os.path.isfile(keys_path) and os.stat(keys_path).st_size != 0:
     keys_file = open(keys_path, "r")
 else:
-    print("Warning: better_weather_keys.txt file is missing or it is not in the working directory!")
+    print("Warning: File better_weather_keys.txt is not in the working directory or it is empty!")
 
-# read input file as list of lists
+# read input file as list dictionary
 keys_dict = {}
 for line in keys_file:
     key, value = line.strip().split(',')
@@ -28,8 +29,12 @@ keys_file.close()
 # https://www.weatherapi.com/signup.aspx
 # The url is set to get forecast data. For historical data it should be changed
 
+# KeyError exception handling
 url_wheatherapi = 'https://api.weatherapi.com/v1/forecast.json'
-API_KEY_wheatherapi = keys_dict['wheatherapi.com']
+try:
+    API_KEY_wheatherapi = keys_dict['wheatherapi.com']
+except KeyError:
+    print("The key name in the file better_weather_keys.txt is incorrect, should be 'wheatherapi.com'")
 
 # You can change the name of the city <q parameter>, search engine is quite efficient
 # days=1 means that you get hourly forecast for one date, the day you are make a request. 
@@ -37,6 +42,10 @@ API_KEY_wheatherapi = keys_dict['wheatherapi.com']
 params_wheatherapi = dict(key=API_KEY_wheatherapi, q='Przemysl', days=1) 
 
 resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
+
+# check if lack of proper request response is due to 403 error
+if resonse_wheatherapi.status_code == 403:
+    print("Supplied API key for wheatherapi.com is wrong.")
 
 # print(resonse_wheatherapi)
 # print(resonse_wheatherapi.status_code)
