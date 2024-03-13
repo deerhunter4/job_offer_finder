@@ -3,7 +3,24 @@
 
 import requests
 import json
-import os
+import os, sys
+import argparse
+
+parser = argparse.ArgumentParser(
+                    prog='BetterWeather',
+                    description='This program is written in Python. Its purpose is to collect weather forecast data\n'
+                    'from a few websites (e.g. Open-Meteo, WeatherAPI) and combine it\n'
+                    'into one more accurate weather prediction. After providing the location eg. "Madrid"\n'
+                    'you will receive a file with weather data and a user-friendly plot.')
+
+# positional arguments
+parser.add_argument('location', metavar='location', type= str,
+                    help='enter location for which you want to get weather forecast e.g. Cracovia')
+
+# if no arguments were given, printing the help message (args = "--help")
+# args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
+args = parser.parse_args()
+print(args.location)
 
 keys_path = './better_weather_keys.txt'
 
@@ -39,7 +56,7 @@ except KeyError:
 # You can change the name of the city <q parameter>, search engine is quite efficient
 # days=1 means that you get hourly forecast for one date, the day you are make a request. 
 # To get forecast for next day you need additional parameter
-params_wheatherapi = dict(key=API_KEY_wheatherapi, q='Przemysl', days=1) 
+params_wheatherapi = dict(key=API_KEY_wheatherapi, q=args.location, days=1) 
 
 resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
 
@@ -72,9 +89,9 @@ for item in resonse_wheatherapi_hours:
     temp_c_wheatherapi.append(item["temp_c"])
     rain_wheatherapi.append(item['precip_mm'])
 
-print(hours_wheatherapi)
-print(temp_c_wheatherapi)
-print(rain_wheatherapi)
+# print(hours_wheatherapi)
+# print(temp_c_wheatherapi)
+# print(rain_wheatherapi)
 
 ######################
 ### open-meteo.com ###
@@ -104,15 +121,15 @@ rain_openmeteo = response_openmeteo_dict['hourly']['precipitation']
 
 # below you can compare forecasts from bothe webpages, and yes, they differ :)
 
-print(hours_openmeteo)
-print(temp_c_openmeteo)
-print(rain_openmeteo)
+# print(hours_openmeteo)
+# print(temp_c_openmeteo)
+# print(rain_openmeteo)
 
-print(hours_wheatherapi)
-print(hours_openmeteo)
+# print(hours_wheatherapi)
+# print(hours_openmeteo)
 
-print(temp_c_wheatherapi)
-print(temp_c_openmeteo)
+# print(temp_c_wheatherapi)
+# print(temp_c_openmeteo)
 
 
 #####################
@@ -150,12 +167,14 @@ for item in response_meteostat_dict["data"]:
     temp_c_meteostat.append(item['temp'])
     rain_meteostat.append(item['prcp'])
 
-print(hours_meteostat)
-print(temp_c_meteostat)
-print(rain_meteostat)
+# print(hours_meteostat)
+# print(temp_c_meteostat)
+# print(rain_meteostat)
 
+print(f'Temperature in {args.location} on {current_date}.')
 print('', temp_c_wheatherapi, '\n',temp_c_openmeteo, '\n', temp_c_meteostat)
 
+print(f'Rainfall in {args.location} on {current_date}.')
 print('', rain_wheatherapi, '\n', rain_openmeteo, '\n', rain_meteostat)
 
 print('', hours_wheatherapi[1], '\n', hours_openmeteo[1], '\n', hours_meteostat[1]) # three different time formats
