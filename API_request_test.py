@@ -8,18 +8,18 @@ import argparse
 
 parser = argparse.ArgumentParser(
                     prog='BetterWeather',
-                    description='This program is written in Python. Its purpose is to collect weather forecast data\n'
-                    'from a few websites (e.g. Open-Meteo, WeatherAPI) and combine it\n'
-                    'into one more accurate weather prediction. After providing the location eg. "Madrid"\n'
-                    'you will receive a file with weather data and a user-friendly plot.')
+                    description="""This program is written in Python. Its purpose is to collect weather forecast data
+                    from a few websites (e.g. Open-Meteo, WeatherAPI) and combine it
+                    into one more accurate weather prediction. After providing the location eg. "Madrid"
+                    you will receive a file with weather data and a user-friendly plot.""")
 
 # positional arguments
 parser.add_argument('location', metavar='location', type= str,
                     help='enter location for which you want to get weather forecast e.g. Cracovia')
 
 # if no arguments were given, printing the help message (args = "--help")
-# args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
-args = parser.parse_args()
+args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
+# args = parser.parse_args()
 print(args.location)
 
 keys_path = './better_weather_keys.txt'
@@ -44,7 +44,7 @@ keys_file.close()
 
 # You need to register on the web page first to get API key
 # https://www.weatherapi.com/signup.aspx
-# The url is set to get forecast data. For historical data it should be changed
+# The url is set to get forecast data. For historical data it should be changed.
 
 # KeyError exception handling
 url_wheatherapi = 'https://api.weatherapi.com/v1/forecast.json'
@@ -53,9 +53,8 @@ try:
 except KeyError:
     print("The key name in the file better_weather_keys.txt is incorrect, should be 'wheatherapi.com'")
 
-# You can change the name of the city <q parameter>, search engine is quite efficient
+# You can change the name of the city <location parameter>, the search engine is quite efficient.
 # days=1 means that you get hourly forecast for one date, the day you are make a request. 
-# To get forecast for next day you need additional parameter
 params_wheatherapi = dict(key=API_KEY_wheatherapi, q=args.location, days=1) 
 
 resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
@@ -63,6 +62,7 @@ resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
 # check if lack of proper request response is due to 403 error
 if resonse_wheatherapi.status_code == 403:
     print("Supplied API key for wheatherapi.com is wrong.")
+    exit()
 
 # print(resonse_wheatherapi)
 # print(resonse_wheatherapi.status_code)
