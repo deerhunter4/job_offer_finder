@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(
 
 # positional arguments
 parser.add_argument('location', metavar='location', type= str,
-                    help='enter location for which you want to get weather forecast e.g. Cracovia')
+                    help='Enter the location for which you want to get the weather forecast e.g. "Cracovia".')
 
 # if no arguments were given, printing the help message (args = "--help")
 # args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
