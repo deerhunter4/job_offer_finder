@@ -9,7 +9,7 @@ import argparse
 parser = argparse.ArgumentParser(
                     prog='BetterWeather',
                     description='This program is written in Python. Its purpose is to collect weather forecast data\n'
-                    'from a few websites (e.g. Open-Meteo, WeatherAPI) and combine it\n'
+                    'from a few free weather forecast APIs (e.g. Open-Meteo, WeatherAPI) and combine it\n'
                     'into one more accurate weather prediction. After providing the location eg. "Madrid"\n'
                     'you will receive a file with weather data and a user-friendly plot.')
 
