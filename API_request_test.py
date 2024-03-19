@@ -28,7 +28,8 @@ keys_path = './better_weather_keys.txt'
 if os.path.isfile(keys_path) and os.stat(keys_path).st_size != 0:
     keys_file = open(keys_path, "r")
 else:
-    print("Warning: File better_weather_keys.txt is not in the working directory or it is empty!")
+    print("Error: File better_weather_keys.txt is not in the working directory or it is empty!")
+    exit()
 
 # read input file as list dictionary
 keys_dict = {}
