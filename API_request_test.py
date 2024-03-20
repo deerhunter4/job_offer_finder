@@ -9,13 +9,13 @@ import argparse
 parser = argparse.ArgumentParser(
                     prog='BetterWeather',
                     description="""This program is written in Python. Its purpose is to collect weather forecast data
-                    from a few websites (e.g. Open-Meteo, WeatherAPI) and combine it
+                    from a few free weather forecast APIs (e.g. Open-Meteo, WeatherAPI) and combine it
                     into one more accurate weather prediction. After providing the location eg. "Madrid"
                     you will receive a file with weather data and a user-friendly plot.""")
 
 # positional arguments
 parser.add_argument('location', metavar='location', type= str,
-                    help='enter location for which you want to get weather forecast e.g. Cracovia')
+                    help='Enter the location for which you want to get the weather forecast e.g. "Cracovia".')
 
 # if no arguments were given, printing the help message (args = "--help")
 args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
@@ -28,7 +28,8 @@ keys_path = './better_weather_keys.txt'
 if os.path.isfile(keys_path) and os.stat(keys_path).st_size != 0:
     keys_file = open(keys_path, "r")
 else:
-    print("Warning: File better_weather_keys.txt is not in the working directory or it is empty!")
+    print("Error: File better_weather_keys.txt is not in the working directory or it is empty!")
+    exit()
 
 # read input file as list dictionary
 keys_dict = {}
