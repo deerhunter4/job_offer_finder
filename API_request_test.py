@@ -3,6 +3,41 @@
 
 import requests
 import json
+import os, sys
+import argparse
+
+parser = argparse.ArgumentParser(
+                    prog='BetterWeather',
+                    description="""This program is written in Python. Its purpose is to collect weather forecast data
+                    from a few free weather forecast APIs (e.g. Open-Meteo, WeatherAPI) and combine it
+                    into one more accurate weather prediction. After providing the location eg. "Madrid"
+                    you will receive a file with weather data and a user-friendly plot.""")
+
+# positional arguments
+parser.add_argument('location', metavar='location', type= str,
+                    help='Enter the location for which you want to get the weather forecast e.g. "Cracovia".')
+
+# if no arguments were given, printing the help message (args = "--help")
+args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
+# args = parser.parse_args()
+print(args.location)
+
+keys_path = './better_weather_keys.txt'
+
+# Check if better_weather_keys.txt file exists and it is not empty
+if os.path.isfile(keys_path) and os.stat(keys_path).st_size != 0:
+    keys_file = open(keys_path, "r")
+else:
+    print("Error: File better_weather_keys.txt is not in the working directory or it is empty!")
+    exit()
+
+# read input file as list dictionary
+keys_dict = {}
+for line in keys_file:
+    key, value = line.strip().split(',')
+    keys_dict[key] = value
+
+keys_file.close()
 
 ######################
 ### weatherapi.com ###
@@ -10,17 +45,25 @@ import json
 
 # You need to register on the web page first to get API key
 # https://www.weatherapi.com/signup.aspx
-# The url is set to get forecast data. For historical data it should be changed
+# The url is set to get forecast data. For historical data it should be changed.
 
+# KeyError exception handling
 url_wheatherapi = 'https://api.weatherapi.com/v1/forecast.json'
-API_KEY_wheatherapi = <paste here your personal API key>
+try:
+    API_KEY_wheatherapi = keys_dict['wheatherapi.com']
+except KeyError:
+    print("The key name in the file better_weather_keys.txt is incorrect, should be 'wheatherapi.com'")
 
-# You can change the name of the city <q parameter>, search engine is quite efficient
+# You can change the name of the city <location parameter>, the search engine is quite efficient.
 # days=1 means that you get hourly forecast for one date, the day you are make a request. 
-# To get forecast for next day you need additional parameter
-params_wheatherapi = dict(key=API_KEY_wheatherapi, q='Przemysl', days=1) 
+params_wheatherapi = dict(key=API_KEY_wheatherapi, q=args.location, days=1) 
 
 resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
+
+# check if lack of proper request response is due to 403 error
+if resonse_wheatherapi.status_code == 403:
+    print("Supplied API key for wheatherapi.com is wrong.")
+    exit()
 
 # print(resonse_wheatherapi)
 # print(resonse_wheatherapi.status_code)
@@ -47,9 +90,9 @@ for item in resonse_wheatherapi_hours:
     temp_c_wheatherapi.append(item["temp_c"])
     rain_wheatherapi.append(item['precip_mm'])
 
-print(hours_wheatherapi)
-print(temp_c_wheatherapi)
-print(rain_wheatherapi)
+# print(hours_wheatherapi)
+# print(temp_c_wheatherapi)
+# print(rain_wheatherapi)
 
 ######################
 ### open-meteo.com ###
@@ -66,7 +109,7 @@ url_openmeteo = "https://api.open-meteo.com/v1/forecast"
 params_openmeteo = {
 	"latitude": latitude,
 	"longitude": longitude,
-	"hourly": ["temperature_2m", "precipitation"], # here we can extend number of parameters
+	"hourly": ["temperature_2m", "precipitation"],  # here we can extend number of parameters
 	"forecast_days": 1
 }
 
@@ -79,15 +122,15 @@ rain_openmeteo = response_openmeteo_dict['hourly']['precipitation']
 
 # below you can compare forecasts from bothe webpages, and yes, they differ :)
 
-print(hours_openmeteo)
-print(temp_c_openmeteo)
-print(rain_openmeteo)
+# print(hours_openmeteo)
+# print(temp_c_openmeteo)
+# print(rain_openmeteo)
 
-print(hours_wheatherapi)
-print(hours_openmeteo)
+# print(hours_wheatherapi)
+# print(hours_openmeteo)
 
-print(temp_c_wheatherapi)
-print(temp_c_openmeteo)
+# print(temp_c_wheatherapi)
+# print(temp_c_openmeteo)
 
 
 #####################
@@ -99,17 +142,18 @@ print(temp_c_openmeteo)
 # The url is set to get forecast data. For historical data it should be changed
 
 url_meteostat = 'https://meteostat.p.rapidapi.com/point/hourly'
-API_KEY_meteostat = <paste here your personal API key>
+API_KEY_meteostat = keys_dict['meteostat.net']
+current_date = hours_wheatherapi[1].split(' ')[0]
 
 params_meteostat = {
 	"lat": latitude,
 	"lon": longitude,
-	"start":"2024-03-06", # here we have to use some function that automatically retrieves today's date
-	"end":"2024-03-06"
+	"start": current_date, # current day obtained from first api request
+	"end": current_date
 }
 
 headers_meteostat = {
-	"X-RapidAPI-Key": <paste here your personal API key>,
+	"X-RapidAPI-Key": API_KEY_meteostat,
 	"X-RapidAPI-Host": "meteostat.p.rapidapi.com"
 }
 
@@ -123,13 +167,15 @@ for item in response_meteostat_dict["data"]:
     hours_meteostat.append(item['time'])
     temp_c_meteostat.append(item['temp'])
     rain_meteostat.append(item['prcp'])
-    
-print(hours_meteostat)
-print(temp_c_meteostat)
-print(rain_meteostat)
 
+# print(hours_meteostat)
+# print(temp_c_meteostat)
+# print(rain_meteostat)
+
+print(f'Temperature in {args.location} on {current_date}.')
 print('', temp_c_wheatherapi, '\n',temp_c_openmeteo, '\n', temp_c_meteostat)
 
+print(f'Rainfall in {args.location} on {current_date}.')
 print('', rain_wheatherapi, '\n', rain_openmeteo, '\n', rain_meteostat)
 
 print('', hours_wheatherapi[1], '\n', hours_openmeteo[1], '\n', hours_meteostat[1]) # three different time formats
