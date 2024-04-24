@@ -1,16 +1,16 @@
 import requests
 
-# For now request works only for default '24h' forecast period
+# Note: For now all requests work only for the default '24h' forecast period.
 
 # weatherapi.com API
 
 
 def request_weatherapi(keys_dict, args):
-    url_weatherapi = 'https://api.weatherapi.com/v1/forecast.json'
+    URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
     API_KEY_weatherapi = keys_dict['weatherapi.com']
 
     params_weatherapi = dict(key=API_KEY_weatherapi, q=args.location, days=1)
-    resonse_weatherapi = requests.get(url_weatherapi, params=params_weatherapi)
+    resonse_weatherapi = requests.get(URL_WEATHERAPI, params=params_weatherapi)
 
     # check if lack of proper request response is due to 403 error
     if resonse_weatherapi.status_code == 403:
@@ -42,7 +42,7 @@ def request_weatherapi(keys_dict, args):
 
 
 def request_openmeteo(latitude, longitude):
-    url_openmeteo = "https://api.open-meteo.com/v1/forecast"
+    URL_OPENMETEO = "https://api.open-meteo.com/v1/forecast"
     params_openmeteo = {
         "latitude": latitude,
         "longitude": longitude,
@@ -50,7 +50,7 @@ def request_openmeteo(latitude, longitude):
         "forecast_days": 1
     }
 
-    response_openmeteo = requests.get(url_openmeteo, params=params_openmeteo)
+    response_openmeteo = requests.get(URL_OPENMETEO, params=params_openmeteo)
     response_openmeteo_dict = response_openmeteo.json()
 
     hours_openmeteo = response_openmeteo_dict['hourly']['time']
@@ -66,7 +66,7 @@ def request_openmeteo(latitude, longitude):
 
 
 def request_meteostat(keys_dict, latitude, longitude, current_date):
-    url_meteostat = 'https://meteostat.p.rapidapi.com/point/hourly'
+    URL_METEOSTAT = 'https://meteostat.p.rapidapi.com/point/hourly'
     API_KEY_meteostat = keys_dict['meteostat.net']
     # current_date = hours_wheatherapi[1].split(' ')[0]
 
@@ -82,7 +82,7 @@ def request_meteostat(keys_dict, latitude, longitude, current_date):
         "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
     }
 
-    response_meteostat = requests.get(url_meteostat, headers=headers_meteostat, params=params_meteostat)
+    response_meteostat = requests.get(URL_METEOSTAT, headers=headers_meteostat, params=params_meteostat)
     response_meteostat_dict = response_meteostat.json()
 
     hours_meteostat = []
