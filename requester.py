@@ -36,7 +36,7 @@ def request_weatherapi(keys_dict, args):
     weatherapi_dict = {'hours': hours_weatherapi, 'temp': temp_c_weatherapi,
                        'rain': rain_weatherapi, 'latitude': latitude, 'longitude': longitude}
 
-    return weatherapi_dict
+    return weatherapi_dict, latitude, longitude
 
 # open-meteo.com API
 
