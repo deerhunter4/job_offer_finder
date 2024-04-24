@@ -5,8 +5,8 @@ import argparse
 def parameters():
     parser = argparse.ArgumentParser(
             prog='BetterWeather',
-            description="""This program is written in Python.
-            Its purpose is to collect weather forecast data
+            description="""
+            Purpose of the program is to collect weather forecast data
             from a few free weather forecast APIs (e.g. Open-Meteo, WeatherAPI)
             and combine it into one more accurate weather prediction.
             After providing the location eg. "Madrid" you will receive a file
