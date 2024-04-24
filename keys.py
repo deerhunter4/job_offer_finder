@@ -20,10 +20,10 @@ def check_keys():
 
     keys_file.close()
 
-    if 'wheatherapi.com' not in keys_dict or 'meteostat.net' not in keys_dict:
+    if 'weatherapi.com' not in keys_dict or 'meteostat.net' not in keys_dict:
         print("""The keys are missing in the better_weather_keys.txt file
               or their names might be incorrect. The correct names are:
-              'wheatherapi.com', 'meteostat.net'""")
+              'weatherapi.com', 'meteostat.net'""")
         exit()
 
     return keys_dict

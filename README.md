@@ -15,8 +15,8 @@ The keys will generated automaticly and will be available after login to your ac
 
 Create better_weather_keys.txt file that will store your api keys generated in previous steps.
 The file should contain the name of the website followed by the appropriate API key separated by a comma, e.g:  
-wheatherapi.com,9b27197b46d...b142443242202  
-meteostat.net,5cc4a3480mshd9...p111424jsn9e365e801bf8
+`weatherapi.com,9b27197b46d...b142443242202`  
+`meteostat.net,5cc4a3480mshd9...p111424jsn9e365e801bf8`
 
 
 Python 3.12, python packages: requests, pandas, TBU

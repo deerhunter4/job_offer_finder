@@ -2,16 +2,16 @@ from arguments import parameters
 from keys import check_keys
 from requester import request_weatherapi, request_openmeteo, request_meteostat
 
-# get parameters
-param = parameters()
-print(param)
+# get parameters that will be used by the requester component
+parameters = parameters()
+print(parameters)
 
 # get API keys from the file
 keys = check_keys()
 print(f"The API keys have correct names:\n{list(keys.keys())}")
 
 # request to wheatherapi
-weatherapi_forecast = request_weatherapi(keys, param)
+weatherapi_forecast = request_weatherapi(keys, parameters)
 print(weatherapi_forecast)
 latitude = weatherapi_forecast['latitude']
 longitude = weatherapi_forecast['longitude']
@@ -26,5 +26,5 @@ meteostat_forecast = request_meteostat(keys, latitude, longitude, current_date)
 print(meteostat_forecast)
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    print("Enjoy the weather forecast.")

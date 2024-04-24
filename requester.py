@@ -6,35 +6,35 @@ import requests
 
 
 def request_weatherapi(keys_dict, args):
-    url_wheatherapi = 'https://api.weatherapi.com/v1/forecast.json'
-    API_KEY_wheatherapi = keys_dict['wheatherapi.com']
+    url_weatherapi = 'https://api.weatherapi.com/v1/forecast.json'
+    API_KEY_weatherapi = keys_dict['weatherapi.com']
 
-    params_wheatherapi = dict(key=API_KEY_wheatherapi, q=args.location, days=1)
-    resonse_wheatherapi = requests.get(url_wheatherapi, params=params_wheatherapi)
+    params_weatherapi = dict(key=API_KEY_weatherapi, q=args.location, days=1)
+    resonse_weatherapi = requests.get(url_weatherapi, params=params_weatherapi)
 
     # check if lack of proper request response is due to 403 error
-    if resonse_wheatherapi.status_code == 403:
-        print("Supplied API key for wheatherapi.com is wrong.")
+    if resonse_weatherapi.status_code == 403:
+        print("Supplied API key for weatherapi.com is wrong.")
         exit()
 
-    resonse_wheatherapi_dict = resonse_wheatherapi.json()
-    resonse_wheatherapi_hours = resonse_wheatherapi_dict['forecast']['forecastday'][0]['hour']
+    resonse_weatherapi_dict = resonse_weatherapi.json()
+    resonse_weatherapi_hours = resonse_weatherapi_dict['forecast']['forecastday'][0]['hour']
 
     # extracting needed information from request response
-    hours_wheatherapi = []
-    temp_c_wheatherapi = []
-    rain_wheatherapi = []
-    for item in resonse_wheatherapi_hours:
-        hours_wheatherapi.append(item["time"])
-        temp_c_wheatherapi.append(item["temp_c"])
-        rain_wheatherapi.append(item['precip_mm'])
+    hours_weatherapi = []
+    temp_c_weatherapi = []
+    rain_weatherapi = []
+    for item in resonse_weatherapi_hours:
+        hours_weatherapi.append(item["time"])
+        temp_c_weatherapi.append(item["temp_c"])
+        rain_weatherapi.append(item['precip_mm'])
 
     # get latitute and longitute of the location
-    latitude = resonse_wheatherapi_dict['location']['lat']
-    longitude = resonse_wheatherapi_dict['location']['lon']
+    latitude = resonse_weatherapi_dict['location']['lat']
+    longitude = resonse_weatherapi_dict['location']['lon']
 
-    weatherapi_dict = {'hours': hours_wheatherapi, 'temp': temp_c_wheatherapi,
-                       'rain': rain_wheatherapi, 'latitude': latitude, 'longitude': longitude}
+    weatherapi_dict = {'hours': hours_weatherapi, 'temp': temp_c_weatherapi,
+                       'rain': rain_weatherapi, 'latitude': latitude, 'longitude': longitude}
 
     return weatherapi_dict
 
