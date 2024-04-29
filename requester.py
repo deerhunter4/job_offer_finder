@@ -83,8 +83,13 @@ def request_meteostat(keys_dict, latitude, longitude, current_date):
     }
 
     response_meteostat = requests.get(URL_METEOSTAT, headers=headers_meteostat, params=params_meteostat)
-    response_meteostat_dict = response_meteostat.json()
 
+    # check if lack of proper request response is due to 403 error
+    if response_meteostat.status_code == 403:
+        print("Supplied API key for meteostat.net is wrong.")
+        exit()
+
+    response_meteostat_dict = response_meteostat.json()
     hours_meteostat = []
     temp_c_meteostat = []
     rain_meteostat = []
