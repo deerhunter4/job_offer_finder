@@ -1,12 +1,15 @@
 import requests
 
+URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
+URL_OPENMETEO = "https://api.open-meteo.com/v1/forecast"
+URL_METEOSTAT = 'https://meteostat.p.rapidapi.com/point/hourly'
+
 # Note: For now all requests work only for the default '24h' forecast period.
 
 # weatherapi.com API
 
 
 def request_weatherapi(keys_dict, args):
-    URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
     API_KEY_weatherapi = keys_dict['weatherapi.com']
 
     params_weatherapi = dict(key=API_KEY_weatherapi, q=args.location, days=1)
@@ -42,7 +45,6 @@ def request_weatherapi(keys_dict, args):
 
 
 def request_openmeteo(latitude, longitude):
-    URL_OPENMETEO = "https://api.open-meteo.com/v1/forecast"
     params_openmeteo = {
         "latitude": latitude,
         "longitude": longitude,
@@ -66,9 +68,7 @@ def request_openmeteo(latitude, longitude):
 
 
 def request_meteostat(keys_dict, latitude, longitude, current_date):
-    URL_METEOSTAT = 'https://meteostat.p.rapidapi.com/point/hourly'
     API_KEY_meteostat = keys_dict['meteostat.net']
-    # current_date = hours_wheatherapi[1].split(' ')[0]
 
     params_meteostat = {
         "lat": latitude,
