@@ -17,7 +17,7 @@ def request_weatherapi(keys_dict, args):
 
     # check if lack of proper request response is due to 403 error
     if resonse_weatherapi.status_code == 403:
-        print("Supplied API key for weatherapi.com is wrong.")
+        print("KeyError: The API key provided for weatherapi.com is invalid.")
         exit()
 
     resonse_weatherapi_dict = resonse_weatherapi.json()
@@ -86,7 +86,7 @@ def request_meteostat(keys_dict, latitude, longitude, current_date):
 
     # check if lack of proper request response is due to 403 error
     if response_meteostat.status_code == 403:
-        print("Supplied API key for meteostat.net is wrong.")
+        print("KeyError: The API key provided for meteostat.net is invalid.")
         exit()
 
     response_meteostat_dict = response_meteostat.json()
