@@ -6,6 +6,18 @@ URL_METEOSTAT = 'https://meteostat.p.rapidapi.com/point/hourly'
 
 # Note: For now all requests work only for the default '24h' forecast period.
 
+# check for the 403 and 503 error
+
+
+def response_errors(api_response, name):
+    if api_response.status_code == 403:
+        print(f"KeyError: The API key provided for {name} is invalid.")
+        exit()
+    elif api_response.status_code == 503:
+        print(f"""ServiceError: {name} server is down for maintenance
+              or is overloaded. Try again in a few minutes.""")
+        exit()
+
 # weatherapi.com API
 
 
@@ -15,10 +27,8 @@ def request_weatherapi(keys_dict, args):
     params_weatherapi = dict(key=API_KEY_weatherapi, q=args.location, days=1)
     resonse_weatherapi = requests.get(URL_WEATHERAPI, params=params_weatherapi)
 
-    # check if lack of proper request response is due to 403 error
-    if resonse_weatherapi.status_code == 403:
-        print("KeyError: The API key provided for weatherapi.com is invalid.")
-        exit()
+    # check if lack of proper request response is due to 403 or 503 error
+    response_errors(resonse_weatherapi, "weatherapi.com")
 
     resonse_weatherapi_dict = resonse_weatherapi.json()
     resonse_weatherapi_hours = resonse_weatherapi_dict['forecast']['forecastday'][0]['hour']
@@ -53,8 +63,11 @@ def request_openmeteo(latitude, longitude):
     }
 
     response_openmeteo = requests.get(URL_OPENMETEO, params=params_openmeteo)
-    response_openmeteo_dict = response_openmeteo.json()
 
+    # check if lack of proper request response is due to 403 or 503 error
+    response_errors(response_openmeteo, "open-meteo.com")
+
+    response_openmeteo_dict = response_openmeteo.json()
     hours_openmeteo = response_openmeteo_dict['hourly']['time']
     temp_c_openmeteo = response_openmeteo_dict['hourly']['temperature_2m']
     rain_openmeteo = response_openmeteo_dict['hourly']['precipitation']
@@ -84,10 +97,8 @@ def request_meteostat(keys_dict, latitude, longitude, current_date):
 
     response_meteostat = requests.get(URL_METEOSTAT, headers=headers_meteostat, params=params_meteostat)
 
-    # check if lack of proper request response is due to 403 error
-    if response_meteostat.status_code == 403:
-        print("KeyError: The API key provided for meteostat.net is invalid.")
-        exit()
+    # check if lack of proper request response is due to 403 or 503 error
+    response_errors(response_meteostat, "meteostat.net")
 
     response_meteostat_dict = response_meteostat.json()
     hours_meteostat = []
