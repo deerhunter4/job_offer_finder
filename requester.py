@@ -1,7 +1,7 @@
 import requests
 
 URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
-URL_OPENMETEO = "https://api.open-meteo.com/v1/forecast"
+URL_OPENMETEO = 'https://api.open-meteo.com/v1/forecast'
 URL_METEOSTAT = 'https://meteostat.p.rapidapi.com/point/hourly'
 
 # Note: For now all requests work only for the default '24h' forecast period.
@@ -28,8 +28,8 @@ def request_weatherapi(keys_dict, args):
     temp_c_weatherapi = []
     rain_weatherapi = []
     for item in resonse_weatherapi_hours:
-        hours_weatherapi.append(item["time"])
-        temp_c_weatherapi.append(item["temp_c"])
+        hours_weatherapi.append(item['time'])
+        temp_c_weatherapi.append(item['temp_c'])
         rain_weatherapi.append(item['precip_mm'])
 
     # get latitute and longitute of the location
@@ -93,7 +93,7 @@ def request_meteostat(keys_dict, latitude, longitude, current_date):
     hours_meteostat = []
     temp_c_meteostat = []
     rain_meteostat = []
-    for item in response_meteostat_dict["data"]:
+    for item in response_meteostat_dict['data']:
         hours_meteostat.append(item['time'])
         temp_c_meteostat.append(item['temp'])
         rain_meteostat.append(item['prcp'])
