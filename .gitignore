@@ -1,0 +1,4 @@
+# list of ignored files
+__pycache__/
+API_request_test.py
+*.txt
