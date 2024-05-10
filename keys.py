@@ -19,8 +19,8 @@ def read_keys(keys_file):
     return keys_dict
 
 
+# Check if better_weather_keys.txt file exists and it is not empty
 def check_keys(keys_path):
-    # Check if better_weather_keys.txt file exists and it is not empty
     if os.path.isfile(keys_path) and os.stat(keys_path).st_size != 0:
         keys_file = open(keys_path, "r")
         return read_keys(keys_file)
