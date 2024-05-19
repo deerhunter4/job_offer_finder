@@ -1,7 +1,7 @@
 from datetime import date
-from arguments import parameters
-from keys import check_keys
-from requester import request_weatherapi, request_openmeteo, request_meteostat
+from argument_parser import parameters
+from key_reader import check_keys
+from api_requester import request_weatherapi, request_openmeteo, request_meteostat
 
 
 if __name__ == "__main__":
