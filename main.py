@@ -1,23 +1,16 @@
 from datetime import date
-from argument_parser import parameters
+from argument_parser import get_parameters
 from key_reader import check_keys
 from api_requester import request_weatherapi, request_openmeteo, request_meteostat
 
 
 if __name__ == "__main__":
 
-    KEYS_PATH = './better_weather_keys.txt'
-
-    # get current date
-    current_date = str(date.today())
-    print(current_date)
-
-    # get parameters that will be used by the requester component
-    parameters = parameters()
-    print(parameters)
+    parameters, current_date = get_parameters()
+    print(f"Parameters used for API request are {parameters}")
 
     # get API keys from the file
-    keys = check_keys(KEYS_PATH)
+    keys = check_keys()
     print(f"The API keys have correct names:\n{list(keys.keys())}")
 
     # request to wheatherapi; get latitude and longitude of the location
