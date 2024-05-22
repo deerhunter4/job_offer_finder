@@ -15,11 +15,23 @@ The keys will generated automaticly and will be available after login to your ac
 
 Create better_weather_keys.txt file that will store your api keys generated in previous steps.
 The file should contain the name of the website followed by the appropriate API key separated by a comma, e.g:  
-wheatherapi.com,9b27197b46d...b142443242202  
+```
+weatherapi.com,9b27197b46d...b142443242202  
 meteostat.net,5cc4a3480mshd9...p111424jsn9e365e801bf8
+```
 
+**Preconditions:**  
+Python version: 3.12  
+Python packages: argparse, requests, pandas, TBU
 
-Python 3.12, python packages: requests, pandas, TBU
+**Usage:**  
+Example of basic usage:  
+`python main.py -location <city>`
 
-**Usage:**
-TBU
+Example of optional arguments usage:  
+`python main.py -location “New York” -forecast_period 72h -date 12-06-2024`
+
+More detailed information can be found in [Better Weather App - feature document](https://docs.google.com/document/d/1BwLEyIXszuNKcbiCdtWt22Z8ZKOX6ePOV2JH_O4gA0I/edit?usp=sharing).
+
+**Note:**  
+App is still under development. So far avalaible optional arguments values are: '24h' for forecast_period and current date for date.
