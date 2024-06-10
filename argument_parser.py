@@ -6,6 +6,10 @@ LOCATION_ARG = "-location"
 PERIOD_ARG = "-fp"
 AVALAIBLE_PERIODS = ['24h', '48h', '72h', '7days', '10days', '14days']
 DATE_ARG = "-date"
+TEMP_ARG = "-temp"
+AVALAIBLE_TEMP = ['C', 'F']
+WEATHER_ARG = '-weather_components'
+AVALAIBLE_WEATHER = ['wind', 'pressure']
 
 
 def check_args(args):
@@ -25,6 +29,14 @@ def check_args(args):
             datetime.strptime(args_dict[DATE_ARG], '%Y-%m-%d')
         except ValueError:
             raise ValueError("Incorrect data format, should be YYYY-MM-DD.")
+
+    if TEMP_ARG in args_dict and args_dict[TEMP_ARG] not in AVALAIBLE_TEMP:
+        raise ValueError("""Select the Celsius [C] or Fahrenheit [F]
+                         temperature scale (default: C).""")
+
+    if WEATHER_ARG in args_dict and args_dict[WEATHER_ARG] not in AVALAIBLE_WEATHER:
+        raise ValueError("""Select additional weather components that you are
+                        interested in. Valid options are: wind and pressure.""")
 
 
 # get parameters that will be used by the requester component
@@ -59,6 +71,15 @@ def get_parameters():
                         date for which the weather forecast will be generated.
                         The correct format should be YYYY-MM-DD""",
                         default=current_date)
+
+    parser.add_argument('-temp', metavar='temperature', type=str, choices=['C', 'F'],
+                        help="""Select the Celsius [C] or Fahrenheit [F] temperature
+                        scale (default: C).""", default='C')
+
+    parser.add_argument('-weather_components', metavar='weather_components',
+                        type=str, choices=['wind', 'pressure'], help="""Select
+                        additional weather components that you are interested in.
+                        Valid options are: wind and pressure.""")
 
     args = parser.parse_args()
     return [args, current_date]
