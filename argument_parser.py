@@ -3,7 +3,7 @@ import argparse
 from datetime import date, datetime
 
 LOCATION_ARG = "-location"
-PERIOD_ARG = "-fp"
+PERIOD_ARG = "-forecast_period"
 AVALAIBLE_PERIODS = ['24h', '48h', '72h', '7days', '10days', '14days']
 DATE_ARG = "-date"
 
@@ -49,7 +49,7 @@ def get_parameters():
                          to get the weather forecast e.g. "Cracovia".""")
 
     # optional arguments
-    parser.add_argument('-fp', metavar='forecast_period', type=str,
+    parser.add_argument('-forecast_period', metavar='forecast_period', type=str,
                         choices=['24h', '48h', '72h', '7days', '10days', '14days'],
                         help="""Enter the forecast period you are interested
                          in. Valid options are: 24h, 48h, 72h, 7days, 10days,
