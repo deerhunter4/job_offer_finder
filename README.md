@@ -29,7 +29,7 @@ Example of basic usage:
 `python main.py -location <city>`
 
 Example of optional arguments usage:  
-`python main.py -location “New York” -forecast_period 72h -date 12-06-2024`
+`python main.py -location "New York" -forecast_period 72h -date 2024-06-24`
 
 More detailed information can be found in [Better Weather App - feature document](https://docs.google.com/document/d/1BwLEyIXszuNKcbiCdtWt22Z8ZKOX6ePOV2JH_O4gA0I/edit?usp=sharing).
 
