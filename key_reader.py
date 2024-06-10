@@ -7,9 +7,14 @@ KEYS_PATH = './better_weather_keys.txt'
 def read_keys():
     keys_dict = {}
     keys_file = open(KEYS_PATH, "r")
-    for line in keys_file:
-        key, value = line.strip().split(',')
-        keys_dict[key] = value
+    try:
+        for line in keys_file:
+            key, value = line.strip().split(',')
+            keys_dict[key] = value
+    except ValueError:
+        raise ValueError(f"""File {KEYS_PATH} has an incorrect format.
+                         Should be comma-delimited txt. E.g. the key name
+                         should be separated from the key by a comma.""")
 
     keys_file.close()
 
