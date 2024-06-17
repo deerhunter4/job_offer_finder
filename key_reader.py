@@ -13,8 +13,9 @@ def read_keys():
             keys_dict[key] = value
     except ValueError:
         raise ValueError(f"""File {KEYS_PATH} has an incorrect format.
-                         Should be comma-delimited txt. E.g. the key name
-                         should be separated from the key by a comma.""")
+                         It should be a comma-delimited text,
+                         following the scheme:
+                         \"<key-name>,<key-value>\"""")
 
     keys_file.close()
 
