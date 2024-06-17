@@ -9,7 +9,7 @@ DATE_ARG = "-date"
 TEMP_ARG = "-temp"
 AVALAIBLE_TEMP = ['C', 'F']
 WEATHER_ARG = '-weather_components'
-AVALAIBLE_WEATHER = ['wind', 'pressure']
+ADDITIONAL_WEATHER_PARAM = ['wind', 'pressure', 'both']
 
 
 def check_args(args):
@@ -34,7 +34,7 @@ def check_args(args):
         raise ValueError("""Select the Celsius [C] or Fahrenheit [F]
                          temperature scale (default: C).""")
 
-    if WEATHER_ARG in args_dict and args_dict[WEATHER_ARG] not in AVALAIBLE_WEATHER:
+    if WEATHER_ARG in args_dict and args_dict[WEATHER_ARG] not in ADDITIONAL_WEATHER_PARAM:
         raise ValueError("""Select additional weather components that you are
                         interested in. Valid options are: wind and pressure.""")
 
@@ -72,14 +72,16 @@ def get_parameters():
                         The correct format should be YYYY-MM-DD""",
                         default=current_date)
 
-    parser.add_argument('-temp', metavar='temperature', type=str, choices=['C', 'F'],
-                        help="""Select the Celsius [C] or Fahrenheit [F] temperature
-                        scale (default: C).""", default='C')
+    parser.add_argument('-temperature', metavar='temperature', type=str,
+                        choices=AVALAIBLE_TEMP, help="""Select the Celsius [C]
+                        or Fahrenheit [F] temperature scale (default: C).""",
+                        default='C')
 
     parser.add_argument('-weather_components', metavar='weather_components',
-                        type=str, choices=['wind', 'pressure'], help="""Select
-                        additional weather components that you are interested in.
-                        Valid options are: wind and pressure.""")
+                        type=str, choices=ADDITIONAL_WEATHER_PARAM,
+                        help="""Selectadditional weather components that you
+                        are interested in. Valid options are: wind,
+                        pressure and both.""")
 
     args = parser.parse_args()
     return [args, current_date]
