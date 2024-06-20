@@ -4,13 +4,14 @@ This program is written in Python. Its purpose is to collect weather forecast da
 
 **Parameters**  
 *Required:*  
--location - Name of the city/town in English. E.g. 'Madrid', 'Valencia', 'Cracovia’
+`-location` - Name of the city/town in English. E.g. 'Madrid', 'Valencia', 'Cracovia’
 
 *Optional:*  
--forecast_period - Forecast period, with six options to choose from: '24h', '48h', '72h', '7days', '10days', '14days'. (default: 24h)  
--date - Date for which weather forecast will be presented or will start from, e.g.: '2024-04-01'. (default: current date)  
--temperature - Two temperature scales to choose from: Celsius [C] and Fahrenheit [F]. (default: C) **!!!not supported for now!!!**  
--weather_components - Additional weather components to choose from: 'wind', 'pressure', 'both'. **!!!not supported for now!!!**
+`-forecast_period` - Forecast period, with six options to choose from: '24h', '48h', '72h', '7days', '10days', '14days'. (default: 24h)  
+`-date` - Date for which weather forecast will be presented or will start from, e.g.: '2024-04-01'. (default: current date)  
+`-temperature` - Two temperature scales to choose from: Celsius [C] and Fahrenheit [F]. (default: C) [**!not supported for now!**]  
+`-pressure` - Additional weather components, 'pressure', will be added to the weather forecast. [**!not supported for now!**]  
+`-wind` - Additional weather components, 'wind speed', will be added to the weather forecast. [**!not supported for now!**]
 
 
 **Requirements:**  
