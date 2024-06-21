@@ -24,12 +24,15 @@ meteostat.net,5cc4a3480mshd9...p111424jsn9e365e801bf8
 Python version: 3.12  
 Python packages: argparse, requests, pandas, TBU
 
-**Usage:**  
+**Usage (Linux):**  
 Example of basic usage:  
-`python main.py -location <city>`
+`python3 main.py -location <city>`
 
 Example of optional arguments usage:  
-`python main.py -location “New York” -forecast_period 72h -date 12-06-2024`
+`python3 main.py -location “New York” -forecast_period 72h -date 12-06-2024`
+
+**Usage (Windows)**  
+Running a program in Windows powershell with the above code might give an error. In that case check if Python3 is installed, by typing `python --version`. If yes, then run the above code again changing 'python3' to 'python'.
 
 More detailed information can be found in [Better Weather App - feature document](https://docs.google.com/document/d/1BwLEyIXszuNKcbiCdtWt22Z8ZKOX6ePOV2JH_O4gA0I/edit?usp=sharing).
 
