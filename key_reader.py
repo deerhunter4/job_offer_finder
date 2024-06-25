@@ -14,7 +14,7 @@ def read_keys():
     except ValueError:
         raise ValueError(f"File {KEYS_PATH} has an incorrect format.\n"
                          "It should be a comma-delimited text, "
-                         "following the scheme:\n"
+                         "following the scheme:"
                          "\"<key-name>,<key-value>\"")
 
     keys_file.close()
