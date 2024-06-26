@@ -18,9 +18,9 @@ def check_args(args):
         raise ValueError("Location argument has not been provided!")
 
     if PERIOD_ARG in args_dict and args_dict[PERIOD_ARG] not in AVALAIBLE_PERIODS:
-        raise ValueError("""Entered forecast_period value is not allowed.
-                         Valid options are: 24h, 48h, 72h, 7days, 10days, 14days
-                         (default: 24h).""")
+        raise ValueError("Entered forecast_period value is not allowed.\n"
+                         "Valid options are: 24h, 48h, 72h, 7days, 10days, "
+                         "14days (default: 24h).")
 
     if DATE_ARG in args_dict:
         try:

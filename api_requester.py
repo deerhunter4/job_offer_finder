@@ -15,9 +15,9 @@ def response_errors(api_response, name):
     if api_response.status_code == 403:
         raise KeyError(f"The API key provided for {name} is invalid.")
     elif api_response.status_code == 503:
-        raise ConnectionError(f"""ServiceError: {name} server is down for
-                              maintenance or is overloaded. Try again in
-                              a few minutes.""")
+        raise ConnectionError(f"ServiceError: {name} server is down for "
+                              "maintenance or is overloaded. Try again in "
+                              "a few minutes.")
 
 
 def parse_weatherapi_response(weatherapi_response):
