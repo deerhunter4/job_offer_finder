@@ -36,13 +36,16 @@ Python packages: argparse, requests, pandas, TBU
 
 **Usage:**  
 Example of basic usage:  
-`python main.py -location <city>`
+`python3 main.py -location <city>`
 
 Example of optional arguments usage:  
-`python main.py -location "New York" -forecast_period 72h -date 2024-06-24`
+`python3 main.py -location “New York” -forecast_period 72h -date 12-06-2024`
+
+ **_NOTE:_**  
+The Better_Weather app and the libraries it uses require Python 3, as indicated in the examples. It is worth noting that on Windows, if Python 3 is installed via an executable installer, the Python executable might be set to `python` by default, especially if no other versions of Python are installed. For more detailed information on setting up Python and managing different versions, please refer to the [official Python documentation](https://docs.python.org/3/using/index.html).
 
 More detailed information can be found in [Better Weather App - feature document](https://docs.google.com/document/d/1BwLEyIXszuNKcbiCdtWt22Z8ZKOX6ePOV2JH_O4gA0I/edit?usp=sharing).
 
-**Note:**  
+**_NOTE:_**  
 App is still under development. For now avalaible optional arguments values are: '24h' for forecast_period and current date for date.
 Additionally, for now, raw weather data will be printed on the screen and no CSV file or plot will be generated.
