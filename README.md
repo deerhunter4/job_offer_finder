@@ -34,7 +34,7 @@ meteostat.net,5cc4a3480mshd9...p111424jsn9e365e801bf8
 Python version: 3.12  
 Python packages: argparse, requests, pandas, TBU
 
-**Usage (Linux):**  
+**Usage:**  
 Example of basic usage:  
 `python3 main.py -location <city>`
 
