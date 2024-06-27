@@ -1,4 +1,5 @@
 import requests
+from response_parser import parse_weatherapi_response, parse_meteostat_response, parse_openmeteo_response
 
 URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
 URL_OPENMETEO = 'https://api.open-meteo.com/v1/forecast'
@@ -18,52 +19,6 @@ def response_errors(api_response, name):
         raise ConnectionError(f"ServiceError: {name} server is down for "
                               "maintenance or is overloaded. Try again in "
                               "a few minutes.")
-
-
-def parse_weatherapi_response(weatherapi_response):
-    response_dict = weatherapi_response.json()
-    forecast_hours = response_dict['forecast']['forecastday'][0]['hour']
-    hours = []
-    temp = []
-    rain = []
-
-    # extracting needed information from request response
-    for item in forecast_hours:
-        hours.append(item['time'])
-        temp.append(item['temp_c'])
-        rain.append(item['precip_mm'])
-
-    latitude = response_dict['location']['lat']
-    longitude = response_dict['location']['lon']
-
-    return {'hours': hours, 'temp': temp, 'rain': rain,
-            'latitude': latitude, 'longitude': longitude}
-
-
-def parse_openmeteo_response(response_openmeteo):
-    response_dict = response_openmeteo.json()
-    hours = response_dict['hourly']['time']
-    temp = response_dict['hourly']['temperature_2m']
-    rain = response_dict['hourly']['precipitation']
-    latitude = response_dict['latitude']
-    longitude = response_dict['longitude']
-
-    return {'hours': hours, 'temp': temp, 'rain': rain,
-            'latitude': latitude, 'longitude': longitude}
-
-
-def parse_meteostat_response(meteostat_response):
-    response_dict = meteostat_response.json()
-    hours = []
-    temp = []
-    rain = []
-
-    for item in response_dict['data']:
-        hours.append(item['time'])
-        temp.append(item['temp'])
-        rain.append(item['prcp'])
-
-    return {'hours': hours, 'temp': temp, 'rain': rain}
 
 
 # weatherapi.com API
