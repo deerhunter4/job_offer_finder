@@ -10,12 +10,15 @@ def parse_weatherapi_response(weatherapi_response):
         temp.append(item['temp_c'])
         rain.append(item['precip_mm'])
 
+    return {'hours_weatherapi': hours, 'temp_weatherapi': temp,
+            'rain_weatherapi': rain}
+
+
+def get_coordinates(weatherapi_response):
+    response_dict = weatherapi_response.json()
     latitude = response_dict['location']['lat']
     longitude = response_dict['location']['lon']
-
-    return {'hours_weatherapi': hours, 'temp_weatherapi': temp,
-            'rain_weatherapi': rain, 'latitude': latitude,
-            'longitude': longitude}
+    return [latitude, longitude]
 
 
 def parse_openmeteo_response(response_openmeteo):

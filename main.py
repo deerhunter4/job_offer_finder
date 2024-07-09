@@ -13,8 +13,7 @@ if __name__ == "__main__":
     print(f"The API keys have correct names:\n{list(keys.keys())}")
 
     # request to wheatherapi; get latitude and longitude of the location
-    weatherapi_forecast = request_weatherapi(keys[WEATHERAPI_NAME], parameters)
-    latitude, longitude = weatherapi_forecast["latitude"], weatherapi_forecast["longitude"]
+    weatherapi_forecast, [latitude, longitude] = request_weatherapi(keys[WEATHERAPI_NAME], parameters)
     print("\nweatherapi forecast\n")
     print(weatherapi_forecast)
 
