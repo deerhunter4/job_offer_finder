@@ -1,5 +1,5 @@
 import requests
-from response_parser import parse_weatherapi_response, parse_meteostat_response, parse_openmeteo_response
+from api_response_parser import parse_weatherapi_response, parse_meteostat_response, parse_openmeteo_response
 
 URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
 URL_OPENMETEO = 'https://api.open-meteo.com/v1/forecast'

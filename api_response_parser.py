@@ -5,7 +5,6 @@ def parse_weatherapi_response(weatherapi_response):
     temp = []
     rain = []
 
-    # extracting needed information from request response
     for item in forecast_hours:
         hours.append(item['time'])
         temp.append(item['temp_c'])
