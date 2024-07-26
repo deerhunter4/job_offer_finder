@@ -1,5 +1,5 @@
 import requests
-from api_response_parser import parse_weatherapi_response, parse_meteostat_response, parse_openmeteo_response, get_coordinates
+from api_response_parser import parse_meteostat_response, parse_openmeteo_response
 
 URL_WEATHERAPI = 'https://api.weatherapi.com/v1/forecast.json'
 URL_OPENMETEO = 'https://api.open-meteo.com/v1/forecast'
@@ -29,7 +29,7 @@ def request_weatherapi(api_key, args):
     # check if lack of proper request response is due to 403 or 503 error
     response_errors(weatherapi_response, WEATHERAPI_NAME)
 
-    return parse_weatherapi_response(weatherapi_response), get_coordinates(weatherapi_response)
+    return weatherapi_response
 
 
 # open-meteo.com API
