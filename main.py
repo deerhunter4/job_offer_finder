@@ -4,6 +4,7 @@ from api_requester import request_weatherapi, request_openmeteo, request_meteost
 from api_response_parser import get_coordinates, parse_weatherapi_response
 from data_transformer import create_dataframe
 from file_writer import write_csv
+from plot import create_plot
 
 if __name__ == "__main__":
 
@@ -38,3 +39,6 @@ if __name__ == "__main__":
 
     # save dataframe as CSV file
     write_csv(dataframe, parameters)
+
+    # create plot 
+    create_plot(dataframe, parameters)
