@@ -26,12 +26,9 @@ def parse_openmeteo_response(response_openmeteo):
     hours = response_dict['hourly']['time']
     temp = response_dict['hourly']['temperature_2m']
     rain = response_dict['hourly']['precipitation']
-    latitude = response_dict['latitude']
-    longitude = response_dict['longitude']
 
     return {'hours_openmeteo': hours, 'temp_openmeteo': temp,
-            'rain_openmeteo': rain, 'latitude': latitude,
-            'longitude': longitude}
+            'rain_openmeteo': rain}
 
 
 def parse_meteostat_response(meteostat_response):
