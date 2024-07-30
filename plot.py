@@ -18,7 +18,7 @@ def create_plot(df, parameters):
     min_temp = df["mean_temp"].min() - df["mean_temp"].max()*0.1
 
     # create plot
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(20, 12))
     # plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
     # fig = plt.figure(figsize=(12, 8))
     ax.bar(df['hour'], df['mean_rain'], color='blue')
@@ -26,6 +26,7 @@ def create_plot(df, parameters):
     ax.set_xlabel('Time [hour]', fontsize=16)
     ax.set_ylabel('Precipitation [mm]', fontsize=16)
     ax.set_ylim(0, max_rain)
+    ax.grid()
 
     ax2 = ax.twinx()
     ax2.plot(df['hour'], df['mean_temp'], marker='o', color='red', linewidth=2)
