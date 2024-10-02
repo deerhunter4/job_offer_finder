@@ -48,4 +48,4 @@ More detailed information can be found in [Better Weather App - feature document
 
 **_NOTE:_**  
 App is still under development. For now avalaible optional arguments values are: '24h' for forecast_period and current date for date.
-Additionally, for now, raw weather data will be printed on the screen and no CSV file or plot will be generated.
+Additionally, for now, raw weather data will be printed on the screen.

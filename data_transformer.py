@@ -18,8 +18,8 @@ def check_hour(forecast_dataframe):
             forecast_dataframe.loc[row_no, 'hour'] = meteostat_hour
 
 
-def create_dataframe(dict1, dict2, dict3):
-    all_data_dict = {**dict1, **dict2, **dict3}
+def create_dataframe(weatherapi_dict, openmeteo_dict, meteostat_dict):
+    all_data_dict = {**weatherapi_dict, **openmeteo_dict, **meteostat_dict}
     full_forecast_dataframe = pd.DataFrame(all_data_dict)
     full_forecast_dataframe.insert(loc=1, column='hour', value="empty")
 
