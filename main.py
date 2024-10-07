@@ -2,7 +2,9 @@ from argument_parser import get_parameters
 from key_reader import get_keys
 from api_requester import request_weatherapi, request_openmeteo, request_meteostat, WEATHERAPI_NAME, METEOSTAT_NAME
 from api_response_parser import get_coordinates, parse_weatherapi_response
-
+from data_transformer import create_dataframe
+from file_writer import write_csv_file
+from plot import create_plot
 
 if __name__ == "__main__":
 
@@ -30,3 +32,10 @@ if __name__ == "__main__":
     meteostat_forecast = request_meteostat(keys[METEOSTAT_NAME], latitude, longitude, parameters.date)
     print("\nmeteostat forecast\n")
     print(meteostat_forecast)
+
+    dataframe = create_dataframe(weatherapi_forecast, openmeteo_forecast, meteostat_forecast)
+    print(dataframe)
+
+    write_csv_file(dataframe, parameters)
+
+    create_plot(dataframe, parameters)
