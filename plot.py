@@ -12,7 +12,6 @@ MAX_SCALE_VALUE_RATIO = 1.1
 MIN_SCALE_VALUE_RATIO = 0.1
 
 
-
 def create_plot(full_forecast_dataframe, parameters):
     # create plot axes limits
     max_rain = LOW_RAIN_SCALE_MAX
